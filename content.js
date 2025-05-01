@@ -62,7 +62,7 @@ function initRubikFont() {
     // פונקציה להחלת הפונט על אלמנט הטקסט של האימייל
     function applyRubikFont() {
         // שינוי הגדרות ברירת המחדל של Gmail
-        changeGmailDefaults();
+        // changeGmailDefaults();
 
         // מחפש את אזור הכתיבה של האימייל
         const emailComposers = document.querySelectorAll('div.Am.Al.editable');
@@ -89,7 +89,7 @@ function initRubikFont() {
         }
 
         // שינוי ברירת המחדל כשלוחצים על כפתור "כתוב"
-        overrideComposeButton();
+        // overrideComposeButton();
     }
 
     // פונקציה לשינוי הגדרות ברירת המחדל של Gmail

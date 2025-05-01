@@ -21,7 +21,7 @@
 
 **אפשרות 1: התקנה מחנות הכרום (מומלץ)**
 
-[כאן יופיע הקישור להתקנה מחנות האינטרנט של Chrome כשהתוסף יפורסם]
+[https://chromewebstore.google.com/detail/epgpogflpabfnbgkbcfhbbaohjdapgal](https://chromewebstore.google.com/detail/epgpogflpabfnbgkbcfhbbaohjdapgal)
 
 **אפשרות 2: התקנה ידנית (למפתחים)**
 
@@ -46,4 +46,4 @@
 ## תמיכה ודיווח על באגים
 
 נתקלת בבעיה? יש לך הצעה לשיפור?
-ניתן לפתוח Issue במאגר ה-GitHub של הפרויקט: [https://github.com/abaye123/Rubik-Chrome-Extension](https://github.com/abaye123/Rubik-Chrome-Extension) (שים לב: יש לעדכן את הקישור לקישור הנכון)
+ניתן לפתוח Issue במאגר ה-GitHub של הפרויקט: [https://github.com/abaye123/Rubik-Chrome-Extension](https://github.com/abaye123/Rubik-Chrome-Extension)
