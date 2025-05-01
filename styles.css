@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap');
+
+/* מגדיר פונט ברירת מחדל לאזור הכתיבה */
+.editable,
+div.Am.Al.editable {
+    font-family: 'Rubik', sans-serif !important;
+    font-size: 11pt !important;
+}
+
+/* מגדיר פתרון לבעיית gmail_default */
+.gmail_default {
+    font-family: 'Rubik', sans-serif !important;
+    font-size: 11pt !important;
+    color: inherit !important;
+}
+
+/* מגדיר שגם פונט ברירת המחדל בתפריט הפונטים יהיה Rubik */
+.e5,
+.J-Z-I {
+    font-family: 'Rubik', sans-serif !important;
+    font-size: 11pt !important;
+}
+
+/* דורס את ההגדרות inline של Gmail */
+[style*="font-family"] {
+    font-family: 'Rubik', sans-serif !important;
+}
+
+[style*="font-size"] {
+    font-size: 11pt !important;
+}

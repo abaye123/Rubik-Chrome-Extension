@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gmail Rubik Font</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+    <div class="popup-container">
+        <div class="header">
+            <div class="logo">
+                <img src="icons/icon128.png" alt="לוגו">
+            </div>
+            <h1 class="title">Rubik</h1>
+        </div>
+
+        <div class="content">
+            <section class="about-section">
+                <h2 class="section-title">אודות התוסף</h2>
+                <p class="description">
+                    תוסף זה מגדיר את פונט <span class="highlight">Rubik</span> בגודל 11 כברירת מחדל בג'ימייל.
+                    הפונט יוחל אוטומטית בכל חלון כתיבת אימייל חדש.
+                </p>
+            </section>
+
+            <!--section class="features-section">
+                <h2 class="section-title">יתרונות</h2>
+                <ul class="features-list">
+                    <li class="feature-item">פונט עברי מודרני ונוח לקריאה</li>
+                    <li class="feature-item">תמיכה מלאה בעברית ואנגלית</li>
+                    <li class="feature-item">גודל אופטימלי לקריאה נוחה</li>
+                    <li class="feature-item">החלה אוטומטית בכל חלון כתיבה חדש</li>
+                </ul>
+            </section-->
+
+            <section class="greeting-section">
+                <h2 class="section-title">ברכה אוטומטית</h2>
+                <div class="greeting-toggle">
+                    <label class="switch">
+                        <input type="checkbox" id="greetingToggle">
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="toggle-label">הוסף ברכה אוטומטית לפי שעה</span>
+                </div>
+                <div class="greeting-options">
+                    <div class="option">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="addBeha" checked>
+                            <span class="checkmark"></span>
+                            <span class="option-label">הוסף "ב"ה" בראש המייל</span>
+                        </label>
+                    </div>
+                    <div class="greeting-preview">
+                        <div class="preview-box">
+                            <p id="greetingPreview">ב"ה<br><br>בוקר טוב,</p>
+                        </div>
+                        <p class="preview-note">* הברכה תשתנה אוטומטית לפי שעת היום</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="signature-section">
+                <h2 class="section-title">חתימה אוטומטית</h2>
+                <div class="signature-toggle">
+                    <label class="switch">
+                        <input type="checkbox" id="signatureToggle">
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="toggle-label">הוסף חתימה אוטומטית</span>
+                </div>
+                <div class="signature-preview">
+                    <textarea id="signatureText" placeholder="הזן את החתימה שלך כאן">בברכה,
+אברהם</textarea>
+                </div>
+                <button id="saveSignature" class="save-button">שמור הגדרות</button>
+            </section>
+        </div>
+
+        <div class="footer" dir="ltr">
+            <p>v1.0.0 &copy; abaye |
+                <a href="https://github.com/your-username/your-repo" target="_blank">GitHub</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+
+</html>
