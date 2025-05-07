@@ -62,7 +62,7 @@ function initRubikFont() {
     // פונקציה להחלת הפונט על אלמנט הטקסט של האימייל
     function applyRubikFont() {
         // שינוי הגדרות ברירת המחדל של Gmail
-        // changeGmailDefaults();
+        changeGmailDefaults();
 
         // מחפש את אזור הכתיבה של האימייל
         const emailComposers = document.querySelectorAll('div.Am.Al.editable');
@@ -89,7 +89,7 @@ function initRubikFont() {
         }
 
         // שינוי ברירת המחדל כשלוחצים על כפתור "כתוב"
-        // overrideComposeButton();
+        overrideComposeButton();
     }
 
     // פונקציה לשינוי הגדרות ברירת המחדל של Gmail
@@ -201,23 +201,30 @@ function addContentToComposer(composer) {
         return;
     }
     
-    // מסמן שהתוכן הוסף
-    composer._contentAdded = true;
-    
     // מחכה שהחלון יהיה מוכן
     setTimeout(() => {
+        // בדיקה אם כבר יש ברכה או חתימה
+        const hasGreeting = checkForGreeting(composer);
+        const hasSignature = checkForSignature(composer);
+        
+        // אם כבר יש גם ברכה וגם חתימה, לא מוסיף שוב
+        if ((greetingEnabled && hasGreeting) && (signatureEnabled && hasSignature)) {
+            composer._contentAdded = true;
+            return;
+        }
+        
         // בודק אם יש תוכן קיים
         const isEmpty = composer.textContent.trim() === '';
         
         // מכין את הברכה לפי השעה
         let greeting = '';
-        if (greetingEnabled) {
+        if (greetingEnabled && !hasGreeting) {
             greeting = getTimeBasedGreeting();
         }
         
         // מכין את החתימה
         let signature = '';
-        if (signatureEnabled) {
+        if (signatureEnabled && !hasSignature) {
             signature = signatureText.replace(/\n/g, '<br>');
         }
         
@@ -226,24 +233,26 @@ function addContentToComposer(composer) {
             // אם אין תוכן, מוסיף את הברכה והחתימה ישירות
             let content = '';
             
-            if (greetingEnabled) {
+            if (greetingEnabled && !hasGreeting) {
                 content += `<div>${greeting}</div><div><br></div>`;
             }
             
-            if (signatureEnabled) {
-                if (greetingEnabled) {
+            if (signatureEnabled && !hasSignature) {
+                if (greetingEnabled && !hasGreeting) {
                     content += `<div><br></div><div><br></div><div>${signature}</div>`;
                 } else {
                     content += `<div>${signature}</div>`;
                 }
             }
             
-            composer.innerHTML = content;
+            if (content) {
+                composer.innerHTML = content;
+            }
         } else {
             // אם יש תוכן, מוסיף את הברכה בהתחלה ואת החתימה בסוף
             
-            // מוסיף את הברכה בהתחלה אם מופעלת
-            if (greetingEnabled && !composer.textContent.includes(greeting)) {
+            // מוסיף את הברכה בהתחלה אם מופעלת ולא קיימת
+            if (greetingEnabled && !hasGreeting) {
                 const firstDiv = composer.querySelector('div:first-child');
                 if (firstDiv) {
                     const greetingDiv = document.createElement('div');
@@ -252,8 +261,8 @@ function addContentToComposer(composer) {
                 }
             }
             
-            // מוסיף את החתימה בסוף אם מופעלת
-            if (signatureEnabled && !composer.textContent.includes(signatureText)) {
+            // מוסיף את החתימה בסוף אם מופעלת ולא קיימת
+            if (signatureEnabled && !hasSignature) {
                 const lastDiv = composer.querySelector('div:last-child');
                 if (lastDiv) {
                     // מוסיף שתי שורות ריקות ואז את החתימה
@@ -266,7 +275,35 @@ function addContentToComposer(composer) {
                 }
             }
         }
+        
+        // מסמן שהתוכן הוסף רק אם הוספנו משהו או שכבר יש את כל מה שצריך
+        if ((greetingEnabled && (hasGreeting || greeting)) && 
+            (signatureEnabled && (hasSignature || signature))) {
+            composer._contentAdded = true;
+        }
     }, 500);
+}
+
+// פונקציה לבדיקה אם כבר יש ברכה
+function checkForGreeting(composer) {
+    const content = composer.innerHTML;
+    // בודק אם יש ברכות אפשריות
+    return content.includes('בוקר טוב') || 
+           content.includes('צהריים טובים') || 
+           content.includes('ערב טוב') || 
+           content.includes('לילה טוב') ||
+           (addBeha && content.includes('ב"ה'));
+}
+
+// פונקציה לבדיקה אם כבר יש חתימה
+function checkForSignature(composer) {
+    const content = composer.innerHTML;
+    // מחלק את החתימה לשורות ובודק אם לפחות השורה הראשונה קיימת
+    const signatureLines = signatureText.split('\n');
+    if (signatureLines.length > 0) {
+        return content.includes(signatureLines[0]);
+    }
+    return false;
 }
 
 // פונקציה להחזרת ברכה מבוססת שעה
